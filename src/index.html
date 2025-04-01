@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Transparent Window</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+      color: white;
+      -webkit-app-region: drag; /* Makes the window draggable */
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .container {
+      padding: 15px;
+    }
+    
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      -webkit-app-region: no-drag; /* Make button clickable */
+    }
+    
+    .toggle-button {
+      position: absolute;
+      top: 10px;
+      right: 40px;
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      -webkit-app-region: no-drag; /* Make button clickable */
+    }
+    
+    .toggle-button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    h1 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #ffffff; /* Ensure heading is white and visible */
+    }
+    
+    p {
+      color: #ffffff; /* Ensure paragraph text is white and visible */
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="close-button" id="close-btn">✕</button>
+    <button class="toggle-button" id="toggle-btn">Hide</button>
+    <h1>Transparent Window</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget semper nisi. 
+      Vivamus tincidunt, dolor in faucibus aliquam, nulla magna commodo ipsum, 
+      ut eleifend eros magna ac nulla. Donec commodo, purus at vehicula imperdiet, 
+      eros massa viverra felis, vel pretium nisi odio nec quam.
+    </p>
+    <p>
+      Proin auctor, arcu eu lacinia dictum, dolor turpis fermentum ex, ac pulvinar 
+      nunc ex in mi. Aliquam aliquam mauris vitae leo bibendum, a commodo justo laoreet.
+    </p>
+  </div>
+  
+  <script>
+    // Handle close button click
+    document.getElementById('close-btn').addEventListener('click', () => {
+      window.close();
+    });
+    
+    // Handle toggle button click
+    document.getElementById('toggle-btn').addEventListener('click', async () => {
+      try {
+        const result = await window.electronAPI.toggleMainWindow();
+        if (result.success) {
+          document.getElementById('toggle-btn').textContent = result.isVisible ? 'Hide' : 'Show';
+        } else {
+          console.error('Failed to toggle window:', result.error);
+        }
+      } catch (error) {
+        console.error('Error toggling window:', error);
+      }
+    });
+  </script>
+</body>
+</html> 
