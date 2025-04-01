@@ -1,0 +1,22 @@
+{
+  "name": "simple-transparent-electron-app",
+  "version": "1.0.0",
+  "description": "A simple transparent Electron application",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "tsc && electron .",
+    "build": "tsc"
+  },
+  "keywords": [
+    "electron",
+    "transparent",
+    "window"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "typescript": "^5.8.2"
+  }
+}
